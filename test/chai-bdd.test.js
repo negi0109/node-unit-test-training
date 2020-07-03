@@ -20,8 +20,8 @@ describe('chai', () => {
                 def('s2', () => ({ a: 1, b: 2 }))
 
                 it('equal', () => {
-                    expect(s1).to.not.equal($s2)
-                    expect(s1).to.deep.equal($s2)
+                    expect(s1).to.not.equal($s2)  // equalのみだと==と同じ挙動
+                    expect(s1).to.deep.equal($s2) // deepで構造体の値まで見る
                     expect(s1).to.eql($s2)
                 })
             })
