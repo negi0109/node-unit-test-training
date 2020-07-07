@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require @babel/register -u bdd-lazy-var/global"
+    "test": "mocha --require @babel/register -u bdd-lazy-var/global",
+    "auto-test": "babel-node tools/auto-test"
   },
   "author": "",
   "license": "ISC",
