@@ -1,5 +1,6 @@
-import * as chokidar from 'chokidar'
+import chokidar from 'chokidar'
 import Mocha from 'mocha';
+import fs from 'fs';
 
 const target_directory = 'src/'
 
@@ -36,18 +37,21 @@ watcher.on('ready', function () {
 
     // Detect File changed
     watcher.on('change', function (path, stats) {
-        log(`File ${path} has been changed`);
+        // log(`File ${path} has been changed`);
         if (stats) console.log(`File ${path} changed size to ${stats.size}`, stats);
 
         let test_path;
         if (/.test.js$/.test(path)) test_path = path
         else if (/.js$/.test(path)) test_path = path.replace(/.js$/, '.test.js')
-        log('test_path:' + test_path)
 
-        Object.keys( require.cache ).forEach( key => delete require.cache[ key ] );
-        const mocha = new Mocha
-        mocha.addFile(test_path)
-        mocha.run()
+        if(fs.existsSync(test_path)){
+            Object.keys( require.cache ).forEach( key => delete require.cache[ key ] );
+            const mocha = new Mocha
+            mocha.addFile(test_path)
+            mocha.run()
+        } else {
+            log(`${path} test is nothing`)
+        }
     });
 
     // Detect File removed
