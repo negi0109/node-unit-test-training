@@ -2,11 +2,11 @@ import chokidar from 'chokidar'
 import Mocha from 'mocha';
 import fs from 'fs';
 
-const target_directory = 'src/'
+const target_directories = ['src/']
 
 const log = console.log.bind(console)
 
-const watcher = chokidar.watch(target_directory, {
+const watcher = chokidar.watch(target_directories, {
     ignored: /[\/\\]\./,
     persistent: true,
 })
