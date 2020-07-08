@@ -6,7 +6,7 @@ const target_directories = ['src/']
 
 const log = console.log.bind(console)
 
-const watcher = chokidar.watch(target_directories, {
+const watcher = chokidar.watch(target_directories.map((path) => `${path}*.js`), {
     ignored: /[\/\\]\./,
     persistent: true,
 })
